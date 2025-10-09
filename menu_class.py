@@ -1,38 +1,31 @@
 """
 
-The following script contains the menu class. It uses a dictionary for each menu item and
-stores information about the menu item as a class attribute. The information being stored is the item's name, price,
-description, and prep time
+The following script contains the menu class. It stores each item's info as object attributes and contains a dictionary with all of
+the objects. The information being stored is the item's name, price, description, and prep time
 
 """
 
 class Menu:
-    items = []
+    items = {}
 
-    def __init__(self):
-        pass  
+    def __init__(self, name: str, price: float, description: str, prep_time: int):
+        self.name = name
+        self.price = price
+        self.description = description
+        self.prep_time = prep_time
+        Menu.items[self.name] = self
 
-    def add_item(self, name: str, price: float, description: str, prep_time: int):
-        new_item = {
-            'name': name,
-            'price': price,
-            'description': description,
-            'prep_time': prep_time
-        }
-        Menu.items.append(new_item)
-        print(f"Added: {new_item}")
+    @classmethod
+    def remove_item(cls, name: str):
+        if name in Menu.items:
+            del Menu.items[name]
+        else:
+            print(f"Item '{name}' not found in the menu.")
 
-    def remove_item(self, name: str):
-        for item in Menu.items: 
-            if item['name'] == name:
-                Menu.items.remove(item)  
-                print(f"Removed: {item}")
-                return
-        print(f"Item '{name}' not found in the menu.")
-
-    def display_menu(self):
+    @classmethod
+    def display_menu(cls):
         if not Menu.items:
             print("The menu is currently empty.")
             return
-        for item in Menu.items:
-            print(f"Item: {item['name']}, Price: ${item['price']:.2f}, Description: {item['description']}, Prep Time: {item['prep_time']} minutes")
+        for item in Menu.items.values():
+            print(f"Item: {item.name}, Price: ${item.price:.2f}, Description: {item.description}, Prep Time: {item.prep_time} minutes")

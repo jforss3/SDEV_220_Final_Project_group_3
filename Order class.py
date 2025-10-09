@@ -1,5 +1,6 @@
 # This module contains the Order class. It creates an object for each order to store relevant info and contains methods to add or
 # remove items, calculate the total price, and return a summary of the order
+from menu_class import Menu
 
 class Order():
     order_number = 1
@@ -19,13 +20,13 @@ class Order():
         order_details += f"Total = ${self.calculate_price():.2f}"
         return order_details
 
-    def add_item(self, item, number = 1):
+    def add_item(self, item: Menu, number: int = 1):
         if item in self.selected_items:
             self.selected_items[item] += number
         else:
             self.selected_items[item] = number
 
-    def remove_item(self, item, number = None):
+    def remove_item(self, item: Menu, number: int = None):
         if number == None or self.selected_items[item] <= number:
             del self.selected_items[item]
         else:
