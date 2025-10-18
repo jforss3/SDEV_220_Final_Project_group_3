@@ -73,6 +73,7 @@ class windowLogin(EasyFrame):
 class windowMenu(EasyFrame):
     
     def __init__(self):
+        # simulates reading menu data from a text file
         menuList = {
             "name": ["Apple Pie", "White Cake", "Chocolate Cookies"],
             "price": [10.00, 15.00, 5.00],
@@ -80,6 +81,12 @@ class windowMenu(EasyFrame):
                             "White cake made from a generation-defining recipe.",
                             "Chocolate cookies made with chocolate by our local chocolatier Alex."],
             "prep_time": [60, 50, 35]}
+        for i in range(len(menuList["name"])):
+            name = menuList["name"][i]
+            price = menuList["price"][i]
+            description = menuList["description"][i]
+            prep_time = menuList["prep_time"][i]
+            Menu(name, price, description, prep_time)
             
         EasyFrame.__init__(self, title = "Sweets Cake Bakery")
         #first title
