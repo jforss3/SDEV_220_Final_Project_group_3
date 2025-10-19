@@ -99,11 +99,13 @@ class windowMenu(EasyFrame):
     def includeBtn(self):
         self.orderBtn["state"] = "normal"
         #needs to add the abilty to add items to the order.
-        if self.textMenuAdd in menu_items:
+        request = self.textMenuAdd.getText()
+        if request in Menu.items:
             #add item----------------
-            self.messageBox(title = "Add", message = "Your item " + textMenuAdd + " was added")
+            item = Menu.items.get(request)
+            self.messageBox(title = "Add", message = "Your item " + request + " was added")
         else:
-            self.messageBox(title = "Error", message = "Your item " + textMenuAdd + " was not vaild")
+            self.messageBox(title = "Error", message = "Your item " + request + " was not vaild")
     
     def removeBtn(self):
         self.orderBtn["state"] = "normal"
