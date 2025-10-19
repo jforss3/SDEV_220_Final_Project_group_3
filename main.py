@@ -154,7 +154,7 @@ class windowOrder(EasyFrame):
         self.addLabel(text = "", row = 1, column = 1)
         self.addLabel(text = "It will take about: ", row = 2, column = 0)
         #list the time it will take
-        self.addLabel(text = Order.calculate_time,, row = 2, column = 1)
+        self.addLabel(text = Order.calculate_time, row = 2, column = 1)
         self.addLabel(text = "This is the customer infromation on the order: ", row = 3, column = 0)
         #List the customer infromation
         self.addLabel(text = current_customer, row = 3, column = 1)
