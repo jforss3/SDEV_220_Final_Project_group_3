@@ -25,7 +25,15 @@ class Menu:
     @classmethod
     def display_menu(cls):
         if not Menu.items:
-            print("The menu is currently empty.")
-            return
+            return "The menu is currently empty."
+        item_string = ""
         for item in Menu.items.values():
-            print(f"Item: {item.name}, Price: ${item.price:.2f}, Description: {item.description}, Prep Time: {item.prep_time} minutes")
+            item_string += f"Item: {item.name}, Price: ${item.price:.2f}, Description: {item.description}, Prep Time: {item.prep_time} minutes\n"
+    
+    @classmethod
+    def display_item_names(cls):
+        if not Menu.items:
+            return "The menu is currently empty."
+        #item_string = ""
+        #for item in Menu.items.keys():
+        return ", ".join(Menu.items.keys())

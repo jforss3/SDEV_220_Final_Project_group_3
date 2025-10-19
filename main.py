@@ -93,7 +93,7 @@ class windowMenu(EasyFrame):
         self.addLabel(text = "Order Menu", row = 0, column = 1)
         self.addLabel(text = "These are the available options:", row = 1, column = 0)
         #need to add abilty to print
-        self.addLabel(text = menuList["name"], row = 1, column = 1)
+        self.addLabel(text = Menu.display_item_names(), row = 1, column = 1)
         self.addLabel(text = "Please input item to add:", row = 2, column = 0)
         self.textMenuAdd = self.addTextField(text="", row = 2, column = 1, width=20)
         self.includeBtn = self.addButton(text = "Add Item", row = 3, column = 1, command = self.includeBtn)
@@ -101,18 +101,21 @@ class windowMenu(EasyFrame):
         self.orderBtn = self.addButton(text = "Proceed to Checkout", row = 5, column = 1, command = self.orderBtn, state = "disable")
         self.quitBtn = self.addButton(text = "Quit", row = 6, column = 1, command = self.quitBtn)
         
-        #add the item
-        def includeBtn(self):
-            self.orderBtn["state"] = "normal"
-            #needs to add the abilty to add items to the order.
-        
-        def removeBtn(self):
-            self.orderBtn["state"] = "normal"
-            #need to add the abilty to remove items
-             
-        def orderBtn(self):
-            self.destroy()
-            windowOrder()
+    #add the item
+    def includeBtn(self):
+        self.orderBtn["state"] = "normal"
+        #needs to add the abilty to add items to the order.
+    
+    def removeBtn(self):
+        self.orderBtn["state"] = "normal"
+        #need to add the abilty to remove items
+
+    def orderBtn(self):
+        self.destroy()
+        windowOrder()
+
+    def quitBtn():
+        pass
 
 #The window that prints out orders
 class windowOrder(EasyFrame):
