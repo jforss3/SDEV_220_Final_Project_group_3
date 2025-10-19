@@ -99,6 +99,11 @@ class windowMenu(EasyFrame):
     def includeBtn(self):
         self.orderBtn["state"] = "normal"
         #needs to add the abilty to add items to the order.
+        if self.textMenuAdd in menu_items:
+            #add item----------------
+            self.messageBox(title = "Add", message = "Your item " + textMenuAdd + " was added")
+        else:
+            self.messageBox(title = "Error", message = "Your item " + textMenuAdd + " was not vaild")
     
     def removeBtn(self):
         self.orderBtn["state"] = "normal"
@@ -153,4 +158,5 @@ def main():
 #makes main work  
 if __name__ == "__main__":
     main()
+
 
