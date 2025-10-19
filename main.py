@@ -73,20 +73,14 @@ class windowLogin(EasyFrame):
 class windowMenu(EasyFrame):
     
     def __init__(self):
-        # simulates reading menu data from a text file
-        menuList = {
-            "name": ["Apple Pie", "White Cake", "Chocolate Cookies"],
-            "price": [10.00, 15.00, 5.00],
-            "description": ["Freshly baked apple pie from fresh apples from the local farm.",
-                            "White cake made from a generation-defining recipe.",
-                            "Chocolate cookies made with chocolate by our local chocolatier Alex."],
-            "prep_time": [60, 50, 35]}
-        for i in range(len(menuList["name"])):
-            name = menuList["name"][i]
-            price = menuList["price"][i]
-            description = menuList["description"][i]
-            prep_time = menuList["prep_time"][i]
-            Menu(name, price, description, prep_time)
+        with open("menu_items.txt", "rt") as menu_items:
+            for item in menu_items:
+                data = item.split(";")
+                name = data[0]
+                price = float(data[1])
+                description = data[2]
+                prep_time = int(data[3])
+                Menu(name, price, description, prep_time)
             
         EasyFrame.__init__(self, title = "Sweets Cake Bakery")
         #first title

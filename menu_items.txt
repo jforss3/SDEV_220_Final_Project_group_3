@@ -1,0 +1,3 @@
+Apple Pie;10;Freshly baked apple pie from fresh apples from the local farm.;60
+White Cake;15;White cake made from a generation-defining recipe.;50
+Chocolate Cookies;5;Chocolate cookies made with chocolate by our local chocolatier Alex.;35
