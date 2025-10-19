@@ -108,17 +108,36 @@ class windowMenu(EasyFrame):
         self.destroy()
         windowOrder()
 
-    def quitBtn():
-        pass
+    def quitBtn(self):
+        self.destroy()
+        windowQuit()
 
 #The window that prints out orders
 class windowOrder(EasyFrame):
     
     def __init__(self):
-        EasyFrame.__init__(self, title = "Your Order")
+        EasyFrame.__init__(self, title = "Sweets Cake Bakery")
         #first title
-        self.addLabel(text = "Order", row = 0, column = 1)
-        #needs to code the ending part.
+        self.addLabel(text = "Your Order", row = 0, column = 1)
+        self.addLabel(text = "Your total come out to: ", row = 1, column = 0)
+        #list the total
+        self.addLabel(text = "", row = 1, column = 1)
+        self.addLabel(text = "It will take about: ", row = 2, column = 0)
+        #list the time it will take
+        self.addLabel(text = "", row = 2, column = 1)
+        self.addLabel(text = "This is the customer infromation on the order: ", row = 3, column = 0)
+        #List the customer infromation
+        self.addLabel(text = "", row = 3, column = 1)
+        self.quitBtn = self.addButton(text = "Submit and Quit", row = 4, column = 1, command = self.quitBtn)
+        self.menuBtn = self.addButton(text = "No, Go Back To Menu", row = 6, column = 1, command = self.menuBtn)
+
+    def quitBtn(self):
+        self.destroy()
+        windowQuit()
+
+    def menuBtn(self):
+        self.destroy()
+        windowMenu()
 
 #Respone to quit
 class windowQuit(EasyFrame):
@@ -134,3 +153,4 @@ def main():
 #makes main work  
 if __name__ == "__main__":
     main()
+
