@@ -40,3 +40,13 @@ class Order():
         for item, number in self.selected_items.items():
             total += item.price * number
         return total
+        
+    def calculate_time(self):
+        if "Apple Pie" in item:
+            print("60 minutes")
+        elif "White Cake" in item:
+            print("50 minutes")
+        elif "Chocolate Cookies" in item:
+            print("35 minutes")
+        else:
+            print("0 minutes")
