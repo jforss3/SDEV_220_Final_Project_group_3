@@ -40,3 +40,10 @@ class Order():
         for item, number in self.selected_items.items():
             total += item.price * number
         return total
+    
+    def calculate_time(self):
+        time = 0
+        for item in self.selected_items.keys():
+            if item.prep_time > time:
+                time = item.prep_time
+        return time
