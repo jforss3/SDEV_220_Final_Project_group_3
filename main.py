@@ -15,6 +15,7 @@ lastName = ""
 email = ""
 address = ""
 credit = ""
+itemName = []
 
 #class
 class windowLogin(EasyFrame):
@@ -97,19 +98,28 @@ class windowMenu(EasyFrame):
         
     #add the item
     def includeBtn(self):
+        global itemName
         self.orderBtn["state"] = "normal"
         #needs to add the abilty to add items to the order.
         request = self.textMenuAdd.getText()
         if request in Menu.items:
-            #add item----------------
             item = Menu.items.get(request)
+            itemName += request
             self.messageBox(title = "Add", message = "Your item " + request + " was added")
         else:
             self.messageBox(title = "Error", message = "Your item " + request + " was not vaild")
     
     def removeBtn(self):
+        global itemName
         self.orderBtn["state"] = "normal"
-        #need to add the abilty to remove items
+        #needs to add the abilty to add items to the order.
+        request = self.textMenuAdd.getText()
+        if request not in itemName:
+            self.messageBox(title = "Error", message = "Your item " + request + " was not in order")
+        else:
+            item = Menu.items.remove(request)
+            itemName -= request
+            self.messageBox(title = "Removed", message = "Your item " + request + " was removed")
 
     def orderBtn(self):
         self.destroy()
@@ -160,5 +170,6 @@ def main():
 #makes main work  
 if __name__ == "__main__":
     main()
+
 
 
