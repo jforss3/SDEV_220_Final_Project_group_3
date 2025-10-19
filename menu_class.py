@@ -34,6 +34,4 @@ class Menu:
     def display_item_names(cls):
         if not Menu.items:
             return "The menu is currently empty."
-        #item_string = ""
-        #for item in Menu.items.keys():
         return ", ".join(Menu.items.keys())

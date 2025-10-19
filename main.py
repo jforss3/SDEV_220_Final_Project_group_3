@@ -10,12 +10,14 @@ from menu_class import Menu
 from customers_class import Customers
 
 #varables
-firstName = ""
-lastName = ""
-email = ""
-address = ""
-credit = ""
-itemName = []
+# firstName = ""
+# lastName = ""
+# email = ""
+# address = ""
+# credit = ""
+#itemName = []
+current_customer = None
+order = None
 
 #class
 class windowLogin(EasyFrame):
@@ -48,17 +50,19 @@ class windowLogin(EasyFrame):
     #submit the login infromation to the classes and unlocks the order button
     def submitLoginBtn(self):
         self.menuBtn["state"] = "normal"
-        global firstName
-        global lastName
-        global email
-        global address
-        global credit
+        #global firstName
+        #global lastName
+        #global email
+        #global address
+        #global credit
+        global current_customer
         #add link to customers class
         firstName = self.textFirstName.getText()
         lastName = self.textLastName.getText()
         email = self.textEmail.getText()
         address = self.textAddress.getText()
         credit = self.textCredit.getText()
+        current_customer = Customers(firstName, lastName, email, address, credit)
 
     #opens the order window up
     def menuBtn(self):
@@ -74,6 +78,9 @@ class windowLogin(EasyFrame):
 class windowMenu(EasyFrame):
     
     def __init__(self):
+        global current_customer
+        global order
+        # get menu items
         with open("menu_items.txt", "rt") as menu_items:
             for item in menu_items:
                 data = item.split(";")
@@ -82,7 +89,8 @@ class windowMenu(EasyFrame):
                 description = data[2]
                 prep_time = int(data[3])
                 Menu(name, price, description, prep_time)
-            
+        
+        order = Order(current_customer)
         EasyFrame.__init__(self, title = "Sweets Cake Bakery")
         #first title
         self.addLabel(text = "Order Menu", row = 0, column = 1)
@@ -98,28 +106,33 @@ class windowMenu(EasyFrame):
         
     #add the item
     def includeBtn(self):
-        global itemName
+        #global itemName
+        global order
         self.orderBtn["state"] = "normal"
         #needs to add the abilty to add items to the order.
         request = self.textMenuAdd.getText()
         if request in Menu.items:
             item = Menu.items.get(request)
-            itemName += request
+            order.add_item(item)
             self.messageBox(title = "Add", message = "Your item " + request + " was added")
         else:
-            self.messageBox(title = "Error", message = "Your item " + request + " was not vaild")
+            self.messageBox(title = "Error", message = "Your item " + request + " is not on the menu")
     
     def removeBtn(self):
-        global itemName
+        #global itemName
+        global order
         self.orderBtn["state"] = "normal"
         #needs to add the abilty to add items to the order.
         request = self.textMenuAdd.getText()
-        if request not in itemName:
-            self.messageBox(title = "Error", message = "Your item " + request + " was not in order")
+        if request in Menu.items:
+            item = Menu.items.get(request)
+            if item in order.selected_items:
+                order.remove_item(item)
+                self.messageBox(title = "Removed", message = "Your item " + request + " was removed")
+            else:
+                self.messageBox(title = "Error", message = "Your item " + request + " is not in the order")
         else:
-            item = Menu.items.remove(request)
-            itemName -= request
-            self.messageBox(title = "Removed", message = "Your item " + request + " was removed")
+            self.messageBox(title = "Error", message = "Your item " + request + " is not on the menu")
 
     def orderBtn(self):
         self.destroy()
@@ -170,6 +183,3 @@ def main():
 #makes main work  
 if __name__ == "__main__":
     main()
-
-
-
