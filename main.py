@@ -154,10 +154,10 @@ class windowOrder(EasyFrame):
         self.addLabel(text = "", row = 1, column = 1)
         self.addLabel(text = "It will take about: ", row = 2, column = 0)
         #list the time it will take
-        self.addLabel(text = "", row = 2, column = 1)
+        self.addLabel(text = Order.calculate_time,, row = 2, column = 1)
         self.addLabel(text = "This is the customer infromation on the order: ", row = 3, column = 0)
         #List the customer infromation
-        self.addLabel(text = "", row = 3, column = 1)
+        self.addLabel(text = current_customer, row = 3, column = 1)
         self.quitBtn = self.addButton(text = "Submit and Quit", row = 4, column = 1, command = self.quitBtn)
         self.menuBtn = self.addButton(text = "No, Go Back To Menu", row = 6, column = 1, command = self.menuBtn)
 
@@ -183,3 +183,4 @@ def main():
 #makes main work  
 if __name__ == "__main__":
     main()
+
