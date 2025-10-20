@@ -13,5 +13,8 @@ class Customers():
         Customers.id_Num += 1
         Customers.customer_dict[self.customer_id] = self
     
+    def __str__(self):
+        return f"Name: {self.get_name()}, email: {self.email}, address: {self.address}, credit card number: {self.credit_card}"
+    
     def get_name(self):
         return f"{self.first_name} {self.last_name}"

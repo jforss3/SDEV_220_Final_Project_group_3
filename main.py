@@ -150,11 +150,12 @@ class windowOrder(EasyFrame):
         #first title
         self.addLabel(text = "Your Order", row = 0, column = 1)
         self.addLabel(text = "Your total come out to: ", row = 1, column = 0)
+        self.addLabel(text = order.calculate_price(), row = 1, column = 1)
         #list the total
         self.addLabel(text = "", row = 1, column = 1)
         self.addLabel(text = "It will take about: ", row = 2, column = 0)
         #list the time it will take
-        self.addLabel(text = Order.calculate_time, row = 2, column = 1)
+        self.addLabel(text = order.calculate_time(), row = 2, column = 1)
         self.addLabel(text = "This is the customer infromation on the order: ", row = 3, column = 0)
         #List the customer infromation
         self.addLabel(text = current_customer, row = 3, column = 1)
