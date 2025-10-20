@@ -10,12 +10,6 @@ from menu_class import Menu
 from customers_class import Customers
 
 #varables
-# firstName = ""
-# lastName = ""
-# email = ""
-# address = ""
-# credit = ""
-#itemName = []
 current_customer = None
 order = None
 
@@ -50,13 +44,8 @@ class windowLogin(EasyFrame):
     #submit the login infromation to the classes and unlocks the order button
     def submitLoginBtn(self):
         self.menuBtn["state"] = "normal"
-        #global firstName
-        #global lastName
-        #global email
-        #global address
-        #global credit
-        global current_customer
         #add link to customers class
+        global current_customer
         firstName = self.textFirstName.getText()
         lastName = self.textLastName.getText()
         email = self.textEmail.getText()
@@ -68,11 +57,9 @@ class windowLogin(EasyFrame):
     def menuBtn(self):
         self.destroy()
         windowMenu()
-        
-    #opens the order window up
+
     def quitBtn(self):
-        self.destroy()
-        windowQuit()
+        self.master.destroy()
 
 #The window to add items to the order   
 class windowMenu(EasyFrame):
@@ -98,25 +85,23 @@ class windowMenu(EasyFrame):
         #need to add abilty to print
         self.addLabel(text = Menu.display_item_names(), row = 1, column = 1)
         self.addLabel(text = "Please input item to add:", row = 2, column = 0)
-        self.textMenuAdd = self.addTextField(text="", row = 2, column = 1, width=20)
+        #self.textMenuAdd = self.addTextField(text="", row = 2, column = 1, width=20)
+        combobox_goods = list(Menu.items)
+        self.comboBoxAdd = self.addCombobox(text = "Placeholder", values = combobox_goods, row = 2, column = 1)
         self.includeBtn = self.addButton(text = "Add Item", row = 3, column = 1, command = self.includeBtn)
         self.removeBtn = self.addButton(text = "Remove Item", row = 4, column = 1, command = self.removeBtn)
         self.orderBtn = self.addButton(text = "Proceed to Checkout", row = 5, column = 1, command = self.orderBtn, state = "disable")
         self.quitBtn = self.addButton(text = "Quit", row = 6, column = 1, command = self.quitBtn)
-        
-    #add the item
+    
+    #Combobox selection
     def includeBtn(self):
-        #global itemName
-        global order
+        self.comboBoxAdd["state"] = "normal"
         self.orderBtn["state"] = "normal"
-        #needs to add the abilty to add items to the order.
-        request = self.textMenuAdd.getText()
-        if request in Menu.items:
-            item = Menu.items.get(request)
-            order.add_item(item)
-            self.messageBox(title = "Add", message = "Your item " + request + " was added")
-        else:
-            self.messageBox(title = "Error", message = "Your item " + request + " is not on the menu")
+        #Selecting the item, press the add button to confirm this
+        request = self.comboBoxAdd.get()
+        item = Menu.items.get(request)
+        order.add_item(item)
+        self.messageBox(title = "Add", message = "Your item " + request + " was added")
     
     def removeBtn(self):
         #global itemName
@@ -137,10 +122,9 @@ class windowMenu(EasyFrame):
     def orderBtn(self):
         self.destroy()
         windowOrder()
-
+    
     def quitBtn(self):
-        self.destroy()
-        windowQuit()
+        self.master.destroy()
 
 #The window that prints out orders
 class windowOrder(EasyFrame):
@@ -150,12 +134,12 @@ class windowOrder(EasyFrame):
         #first title
         self.addLabel(text = "Your Order", row = 0, column = 1)
         self.addLabel(text = "Your total come out to: ", row = 1, column = 0)
-        self.addLabel(text = order.calculate_price(), row = 1, column = 1)
+        self.addLabel(text = f"${order.calculate_price():.2f}", row = 1, column = 1)
         #list the total
         self.addLabel(text = "", row = 1, column = 1)
         self.addLabel(text = "It will take about: ", row = 2, column = 0)
         #list the time it will take
-        self.addLabel(text = order.calculate_time(), row = 2, column = 1)
+        self.addLabel(text = f"{order.calculate_time()} minutes", row = 2, column = 1)
         self.addLabel(text = "This is the customer infromation on the order: ", row = 3, column = 0)
         #List the customer infromation
         self.addLabel(text = current_customer, row = 3, column = 1)
@@ -163,8 +147,7 @@ class windowOrder(EasyFrame):
         self.menuBtn = self.addButton(text = "No, Go Back To Menu", row = 6, column = 1, command = self.menuBtn)
 
     def quitBtn(self):
-        self.destroy()
-        windowQuit()
+        self.master.destroy()
 
     def menuBtn(self):
         self.destroy()
